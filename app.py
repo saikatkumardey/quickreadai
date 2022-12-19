@@ -67,6 +67,7 @@ def output_section():
     """Displays summary output."""
     output = st.session_state.get("output", {})
     if not output:
+        add_vertical_space(20)
         return
 
     title = st.session_state.get("title") or output["title"]
@@ -106,7 +107,7 @@ def add_footer():
     with mid:
         add_vertical_space(2)
         st.markdown(
-            """<span id="twitter-link"> ❤️ Built by <a href="https://twitter.com/deysaikatkumar" target="_blank">Saikat Kumar Dey</a></span>""",
+            """<span id="twitter-link"> ❤️ Built by <a href="https://twitter.com/deysaikatkumar" target="_blank">Saikat Kumar Dey</a> | Got <a href="https://forms.gle/arGBqfLNphxrwz6k7">feedback?</a></span>""",
             unsafe_allow_html=True,
         )
 
