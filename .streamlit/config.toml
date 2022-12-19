@@ -164,7 +164,7 @@ runOnSave = true
 base="light"
 
 # Primary accent color for interactive elements.
-primaryColor="orange"
+primaryColor="purple"
 
 # Background color for the main content area.
 # backgroundColor="white"
