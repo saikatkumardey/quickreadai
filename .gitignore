@@ -131,4 +131,3 @@ dmypy.json
 # repo-specific
 data/
 demo
-.streamlit
