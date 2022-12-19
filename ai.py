@@ -5,6 +5,7 @@ import os
 import json
 import streamlit as st
 import utils
+from constants import *
 
 load_dotenv()
 
@@ -12,7 +13,7 @@ openai.api_key = os.getenv("OPENAI_API_KEY")
 GPT_MODEL = os.getenv("OPENAI_MODEL")
 
 # TODO: remember to remove this while debugging
-@st.cache(show_spinner=False, persist=True, max_entries=100)
+@st.cache(show_spinner=False, max_entries=CACHE_MAX_ENTRIES)
 def get_gpt_response(title: str, authors: str, num_words: int = 100) -> dict:
     """
     This function takes in a title and authors for a book, and returns the generated text from the OpenAI GPT model.
@@ -37,7 +38,6 @@ def get_gpt_response(title: str, authors: str, num_words: int = 100) -> dict:
     {new_prompt_request}
     {template}
     """
-    print(new_prompt_request)
     # Make the request to the OpenAI GPT model
     response = openai.Completion.create(
         model=GPT_MODEL,
@@ -69,7 +69,6 @@ def parse_gpt_response(response: dict) -> dict:
         response_end = response.rfind("}")
         # Get the summary from the response text
         response = response[response_start : response_end + 1]
-        print(response)
         # Load the summary as a dictionary
         response_dict = json.loads(response)
         return response_dict

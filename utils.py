@@ -1,9 +1,6 @@
 import streamlit as st
 import json
-import datetime
-
-NOW = datetime.datetime.now().strftime("%Y-%m-%d %H:%M:%S")
-APP_NAME = "QuickreadAI"
+from constants import NOW
 
 
 def dump_json(response, path="data/response.json"):

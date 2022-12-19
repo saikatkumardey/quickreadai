@@ -1,8 +1,11 @@
 import streamlit as st
 import utils
+from deta import Deta
+import os
+from constants import *
 
 st.set_page_config(
-    page_title=f"{utils.APP_NAME}: AI-generated book summary",
+    page_title=f"{APP_NAME}: AI-generated book summary",
     page_icon="📚",
     layout="centered",
     initial_sidebar_state="collapsed",
@@ -11,17 +14,50 @@ st.set_page_config(
 from streamlit_extras.add_vertical_space import add_vertical_space
 import pandas as pd
 import ai
+from dotenv import load_dotenv
 
-utils.local_css("static/style.css")
+load_dotenv()
+
+deta = Deta(os.environ["DETA_KEY"])
+summary_db = deta.Base(SUMMARY_DB)
+
+utils.local_css(CSS_PATH)
 
 
-def get_data():
+@st.cache(show_spinner=False, max_entries=CACHE_MAX_ENTRIES)
+def insert_summary(response):
+    if response:
+        try:
+            summary_db.put(response)
+            return True
+        except Exception as ex:
+            print(f"[Deta] Error pushing summary to DB: {ex}")
+            pass
+    print("[Deta] can't insert empty summary")
+    return False
+
+
+@st.cache(show_spinner=False, max_entries=CACHE_MAX_ENTRIES)
+def get_summary(title, authors):
+    try:
+        data = summary_db.fetch({"title": title, "authors": authors}, limit=1)
+        print("data response", data.items)
+        if data.count > 0:
+            return data.items[0]
+    except Exception as ex:
+        print(f"[Deta] Error fetching summary from DB: {ex}")
+    print("[Deta] no summary found")
+    return {}
+
+
+@st.cache
+def get_book_data():
     """Returns book data from JSON file as Pandas DataFrame.
 
     Returns:
         df (pandas.DataFrame): DataFrame of book data.
     """
-    df = pd.read_json("non_fiction_data.json")
+    df = pd.read_json(BOOK_DATA)
     df.drop_duplicates(["title", "author"], inplace=True)
     df["title_author"] = df["title"] + " | " + df["author"]
     return df
@@ -76,9 +112,9 @@ def add_footer():
 
 
 def main():
-    df = get_data()
+    df = get_book_data()
 
-    st.title(f"📚 {utils.APP_NAME}")
+    st.title(f"📚 {APP_NAME}")
     st.markdown(
         "Skim through the core ideas of non-fiction books in 2 minutes."
     )
@@ -98,9 +134,14 @@ def main():
             f"Please wait. Getting summary for **{title}** by {authors}..."
         ):
             try:
-                st.session_state["output"] = ai.get_gpt_response(
+                st.session_state["output"] = get_summary(
                     title=title, authors=authors
                 )
+                if not st.session_state["output"]:
+                    st.session_state["output"] = ai.get_gpt_response(
+                        title=title, authors=authors
+                    )
+                    insert_summary(st.session_state["output"])
             except Exception as ex:
                 st.error("Error generating summary, please try later..")
 
