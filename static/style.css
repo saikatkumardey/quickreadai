@@ -6,15 +6,12 @@
 }
 
 #quickreadai {
-    /* color: rgb(75, 75, 255); */
     color: purple;
     font-size: 3rem;
-    /* text-align: center; */
     font-weight: 800;
     padding-right: 1rem;
     padding-left: 1rem;
-    /* margin-right: 2rem; */
-    /* margin-left: -3rem; */
+
 }
 
 #select-a-book {
@@ -31,22 +28,19 @@
 }
 
 #twitter-link a {
-    color: orangered;
+    color: purple;
     text-decoration: none;
 }
 
-/* footer {
+#MainMenu {
     visibility: hidden;
-} */
+}
 
-/* #MainMenu {
-    visibility: hidden;
-} */
-
-/* h1 {
-    color: rgb(75, 75, 255);
-} */
 
 footer {
+    visibility: hidden;
+}
+
+h1 a {
     visibility: hidden;
 }
