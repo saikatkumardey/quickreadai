@@ -2,9 +2,7 @@
 
 Skim through the core ideas of non-fiction books.
 
-QuickreadAI is a book summary generator app that generates a summary of a book based on its title and authors. The summary is generated using OpenAI's GPT3 model.
-
-Built with ❤️ by [saikatkumardey](https://github.com/saikatkumardey)
+QuickreadAI summarises non-fiction books using OpenAI's GPT3 model.
 
 ## Requirements
 
