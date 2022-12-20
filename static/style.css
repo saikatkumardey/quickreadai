@@ -28,7 +28,7 @@
 }
 
 #twitter-link {
-    position: fixed;
+    position: relative;
     bottom: 0;
 }
 
