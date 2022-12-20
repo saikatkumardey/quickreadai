@@ -113,11 +113,13 @@ def add_footer():
 def main():
     df = get_book_data()
 
-    st.title(f"📚 {APP_NAME}")
+    _, mid, _ = st.columns([1, 3, 1])
+    with mid:
+        st.title(f"📚 {APP_NAME}")
+    add_vertical_space(2)
     st.markdown(
         "Skim through the core ideas of non-fiction books in 2 minutes."
     )
-    add_vertical_space(1)
     title_author = st.selectbox(
         "**Select the book 👇🏽**",
         df.title_author,
