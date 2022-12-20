@@ -7,8 +7,9 @@ Include the following sections:
 - genre as per Goodreads
 - A no bullshit pitch of the book in 1 line
 - 3 key takeaways => in a list (one sentence = one takeaway)
-- 3 ways to implement it in your life with examples in a list (one sentence = one way)
-- 1 counterpoint
+- 3 ways to implement it in your life => examples in a list (one sentence = one way)
+- 1 counterpoint => be very specific
+- 2 related books => these should be from different authors which complements/supplements the book
 
 Highlight using markdown any word or phrase which should be highlight-worthy.
 After generating the response, make sure that it's a valid JSON.

@@ -27,6 +27,11 @@
 
 }
 
+#twitter-link {
+    position: fixed;
+    bottom: 0;
+}
+
 #twitter-link a {
     color: purple;
     text-decoration: none;
