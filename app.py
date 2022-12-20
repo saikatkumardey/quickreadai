@@ -24,7 +24,7 @@ summary_db = deta.Base(SUMMARY_DB)
 utils.local_css(CSS_PATH)
 
 
-@st.cache(show_spinner=False, max_entries=CACHE_MAX_ENTRIES)
+@st.experimental_memo(show_spinner=False, max_entries=CACHE_MAX_ENTRIES)
 def insert_summary(response):
     if response:
         try:
@@ -37,11 +37,10 @@ def insert_summary(response):
     return False
 
 
-@st.cache(show_spinner=False, max_entries=CACHE_MAX_ENTRIES)
+@st.experimental_memo(show_spinner=False, max_entries=CACHE_MAX_ENTRIES)
 def get_summary(title, authors):
     try:
         data = summary_db.fetch({"title": title, "authors": authors}, limit=1)
-        print("data response", data.items)
         if data.count > 0:
             return data.items[0]
     except Exception as ex:
@@ -50,7 +49,7 @@ def get_summary(title, authors):
     return {}
 
 
-@st.cache
+@st.experimental_memo(show_spinner=False, max_entries=CACHE_MAX_ENTRIES)
 def get_book_data():
     """Returns book data from JSON file as Pandas DataFrame.
 

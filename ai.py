@@ -13,7 +13,7 @@ openai.api_key = os.getenv("OPENAI_API_KEY")
 GPT_MODEL = os.getenv("OPENAI_MODEL")
 
 # TODO: remember to remove this while debugging
-@st.cache(show_spinner=False, max_entries=CACHE_MAX_ENTRIES)
+@st.experimental_memo(show_spinner=False, max_entries=CACHE_MAX_ENTRIES)
 def get_gpt_response(title: str, authors: str, num_words: int = 100) -> dict:
     """
     This function takes in a title and authors for a book, and returns the generated text from the OpenAI GPT model.
@@ -51,6 +51,7 @@ def get_gpt_response(title: str, authors: str, num_words: int = 100) -> dict:
     return parse_gpt_response(response)
 
 
+@st.experimental_memo(show_spinner=False, max_entries=CACHE_MAX_ENTRIES)
 def parse_gpt_response(response: dict) -> dict:
     """
     This function takes in the response from the OpenAI GPT model and parses it to extract the generated summary.
