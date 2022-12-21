@@ -123,7 +123,7 @@ def add_footer():
     with mid:
         add_vertical_space(2)
         st.markdown(
-            """<span id="twitter-link"> ❤️ Built by <a href="https://twitter.com/deysaikatkumar" target="_blank">Saikat Kumar Dey</a> | Got <a href="https://forms.gle/arGBqfLNphxrwz6k7">feedback?</a></span>""",
+            """<span id="twitter-link"> ❤️ Built by <a href="https://twitter.com/saikatkrdey" target="_blank">Saikat Kumar Dey</a> | Got <a href="https://forms.gle/arGBqfLNphxrwz6k7">feedback?</a></span>""",
             unsafe_allow_html=True,
         )
 
@@ -135,7 +135,9 @@ def main():
     _, mid, _ = st.columns([1, 5, 1])
     with mid:
         st.title(f"📚 {APP_NAME}")
-        st.markdown("Skim through the core ideas of non-fiction books in 2 minutes.")
+        st.markdown(
+            "Skim through the core ideas of non-fiction books in 2 minutes."
+        )
         add_vertical_space(1)
         title_author = st.selectbox(
             "**Select the book 👇🏽**",
