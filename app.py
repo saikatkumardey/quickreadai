@@ -1,7 +1,5 @@
-import streamlit as st
 import utils
-from deta import Deta
-import os
+import streamlit as st
 from constants import *
 
 st.set_page_config(
@@ -10,6 +8,10 @@ st.set_page_config(
     layout="centered",
     initial_sidebar_state="collapsed",
 )
+
+
+from deta import Deta
+import os
 
 from streamlit_extras.add_vertical_space import add_vertical_space
 import pandas as pd
@@ -24,10 +26,18 @@ summary_db = deta.Base(SUMMARY_DB)
 utils.local_css(CSS_PATH)
 
 
-def insert_summary(response):
-    if response:
+def insert_summary(summary: dict) -> bool:
+    """inserts summary into database.
+
+    Args:
+        summary: details of the non-fiction book including title,author,genre,core-idea etc.
+
+    Returns:
+        bool: whether insert was successful
+    """
+    if summary:
         try:
-            summary_db.put(response)
+            summary_db.put(summary)
             return True
         except Exception as ex:
             print(f"[Deta] Error pushing summary to DB: {ex}")
@@ -37,7 +47,16 @@ def insert_summary(response):
 
 
 @st.experimental_memo(show_spinner=False, max_entries=CACHE_MAX_ENTRIES)
-def get_summary(title, authors):
+def get_summary(title: str, authors: str) -> dict:
+    """Gets summary from database based on title and authors.
+
+    Args:
+        title (str): title of the book
+        authors (str): author names separated by commas
+
+    Returns:
+        dict: _description_
+    """
     try:
         data = summary_db.fetch({"title": title, "authors": authors}, limit=1)
         if data.count > 0:
@@ -49,7 +68,7 @@ def get_summary(title, authors):
 
 
 @st.experimental_memo(show_spinner=False, max_entries=CACHE_MAX_ENTRIES)
-def get_book_data():
+def get_book_data() -> pd.DataFrame:
     """Returns book data from JSON file as Pandas DataFrame.
 
     Returns:
@@ -110,6 +129,7 @@ def add_footer():
 
 
 def main():
+
     df = get_book_data()
 
     _, mid, _ = st.columns([1, 5, 1])
