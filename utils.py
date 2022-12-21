@@ -20,12 +20,8 @@ def local_css(file_name):
 
 
 def remote_css(url):
-    st.markdown(
-        f'<link href="{url}" rel="stylesheet">', unsafe_allow_html=True
-    )
+    st.markdown(f'<link href="{url}" rel="stylesheet">', unsafe_allow_html=True)
 
 
 def icon(icon_name):
-    st.markdown(
-        f'<i class="material-icons">{icon_name}</i>', unsafe_allow_html=True
-    )
+    st.markdown(f'<i class="material-icons">{icon_name}</i>', unsafe_allow_html=True)

@@ -135,9 +135,7 @@ def main():
     _, mid, _ = st.columns([1, 5, 1])
     with mid:
         st.title(f"📚 {APP_NAME}")
-        st.markdown(
-            "Skim through the core ideas of non-fiction books in 2 minutes."
-        )
+        st.markdown("Skim through the core ideas of non-fiction books in 2 minutes.")
         add_vertical_space(1)
         title_author = st.selectbox(
             "**Select the book 👇🏽**",
