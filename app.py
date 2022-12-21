@@ -24,7 +24,6 @@ summary_db = deta.Base(SUMMARY_DB)
 utils.local_css(CSS_PATH)
 
 
-@st.experimental_memo(show_spinner=False, max_entries=CACHE_MAX_ENTRIES)
 def insert_summary(response):
     if response:
         try:
