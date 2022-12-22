@@ -41,6 +41,22 @@ streamlit run app.py
 
 To generate a summary of a book, select the title/authors in the form and click the "Get Summary" button. The summary will be displayed in the text box below.
 
+
+## Structure
+
+```
+.
+├── ai.py             # AI-related code
+├── app.py            # Main application code
+├── constants.py      # Constants
+├── db.py             # Database operations code
+├── prompt.py         # GPT-3 prompt
+├── static            # Directory for static files
+│   ├── non_fiction_data.json  # Book data
+│   └── style.css             # Styles
+└── utils.py          # Utility functions
+```
+
 ## Modification
 
 To modify the app, you can edit the code in the `app.py` file. QuickreadAI uses the `get_gpt_response` function in the `openai_client.py` file to get the summary from the OpenAI GPT model, and the `parse_gpt_response` function to parse the response and extract the summary. You can modify these functions to change the way the summary is generated and extracted.
