@@ -1,7 +1,7 @@
-import utils
 import streamlit as st
 from constants import *
 
+# set page config should be declared at the top
 st.set_page_config(
     page_title=f"{APP_NAME}: AI-generated book summary",
     page_icon="📚",
@@ -9,62 +9,11 @@ st.set_page_config(
     initial_sidebar_state="collapsed",
 )
 
-
-from deta import Deta
-import os
-
-from streamlit_extras.add_vertical_space import add_vertical_space
 import pandas as pd
+from streamlit_extras.add_vertical_space import add_vertical_space
+
 import ai
-from dotenv import load_dotenv
-
-load_dotenv()
-
-deta = Deta(os.environ["DETA_KEY"])
-summary_db = deta.Base(SUMMARY_DB)
-
-utils.local_css(CSS_PATH)
-
-
-def insert_summary(summary: dict) -> bool:
-    """inserts summary into database.
-
-    Args:
-        summary: details of the non-fiction book including title,author,genre,core-idea etc.
-
-    Returns:
-        bool: whether insert was successful
-    """
-    if summary:
-        try:
-            summary_db.put(summary)
-            return True
-        except Exception as ex:
-            print(f"[Deta] Error pushing summary to DB: {ex}")
-            pass
-    print("[Deta] can't insert empty summary")
-    return False
-
-
-@st.experimental_memo(show_spinner=False, max_entries=CACHE_MAX_ENTRIES)
-def get_summary(title: str, authors: str) -> dict:
-    """Gets summary from database based on title and authors.
-
-    Args:
-        title (str): title of the book
-        authors (str): author names separated by commas
-
-    Returns:
-        dict: _description_
-    """
-    try:
-        data = summary_db.fetch({"title": title, "authors": authors}, limit=1)
-        if data.count > 0:
-            return data.items[0]
-    except Exception as ex:
-        print(f"[Deta] Error fetching summary from DB: {ex}")
-    print("[Deta] no summary found")
-    return {}
+from db import get_summary, insert_summary
 
 
 @st.experimental_memo(show_spinner=False, max_entries=CACHE_MAX_ENTRIES)

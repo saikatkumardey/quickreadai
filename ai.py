@@ -1,11 +1,13 @@
-import openai
-from dotenv import load_dotenv
-from prompt import prompt, template
-import os
 import json
+import os
+
+import openai
 import streamlit as st
+from dotenv import load_dotenv
+
 import utils
 from constants import *
+from prompt import prompt, template
 
 load_dotenv()
 
