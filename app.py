@@ -14,6 +14,9 @@ from streamlit_extras.add_vertical_space import add_vertical_space
 
 import ai
 from db import get_summary, insert_summary
+import utils
+
+utils.local_css(CSS_PATH)
 
 
 @st.experimental_memo(show_spinner=False, max_entries=CACHE_MAX_ENTRIES)

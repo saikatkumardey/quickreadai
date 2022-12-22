@@ -10,8 +10,6 @@ load_dotenv()
 deta = Deta(os.environ["DETA_KEY"])
 summary_db = deta.Base(SUMMARY_DB)
 
-utils.local_css(CSS_PATH)
-
 
 def insert_summary(summary: dict) -> bool:
     """inserts summary into database.
