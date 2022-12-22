@@ -43,7 +43,7 @@ def get_summary(title: str, authors: str) -> dict:
         authors (str): author names separated by commas
 
     Returns:
-        dict: _description_
+        dict: details of the non-fiction book including title,author,genre,core-idea etc.
     """
     try:
         data = summary_db.fetch({"title": title, "authors": authors}, limit=1)
