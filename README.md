@@ -4,6 +4,11 @@ Skim through the core ideas of non-fiction books in 2 minutes.
 
 QuickreadAI summarises non-fiction books using OpenAI's GPT3 model.
 
+Live demo: https://quickreadai.streamlit.app
+
+[![Watch the demo](https://img.youtube.com/vi/lgazdC3AZO8/maxresdefault.jpg)](https://youtu.be/lgazdC3AZO8)
+
+
 ## Requirements
 
 To use QuickreadAI, you will need:
