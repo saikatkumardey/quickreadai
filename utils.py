@@ -1,6 +1,5 @@
 import streamlit as st
 import json
-from constants import NOW
 
 
 def dump_json(response, path="data/response.json"):
